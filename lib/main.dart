@@ -66,6 +66,24 @@ class HomePage extends StatelessWidget {
               height: 160,
               child: Image.asset(model.moodImagePath, fit: BoxFit.contain),
             ),
+            const SizedBox(height: 28),
+            Wrap(
+              spacing: 12,
+              children: [
+                ElevatedButton(
+                  onPressed: () => context.read<MoodModel>().setHappy(),
+                  child: const Text('Happy'),
+                ),
+                ElevatedButton(
+                  onPressed: () => context.read<MoodModel>().setSad(),
+                  child: const Text('Sad'),
+                ),
+                ElevatedButton(
+                  onPressed: () => context.read<MoodModel>().setExcited(),
+                  child: const Text('Excited'),
+                ),
+              ],
+            ),
           ],
         ),
       ),
