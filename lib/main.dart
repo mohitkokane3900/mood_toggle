@@ -36,9 +36,9 @@ class MoodModel with ChangeNotifier {
   }
 
   String get moodImagePath {
-    if (_mood == 'happy') return 'assets/happy.png';
-    if (_mood == 'sad') return 'assets/sad.png';
-    return 'assets/excited.png';
+    if (_mood == 'happy') return '../assets/happy.png';
+    if (_mood == 'sad') return '../assets/sad.png';
+    return '../assets/excited.png';
   }
 
   Color get backgroundColor {
