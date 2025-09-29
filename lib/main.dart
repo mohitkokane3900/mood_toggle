@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Mood Toggle',
+      title: 'Mood Toggle Challenge',
       theme: ThemeData(useMaterial3: true, colorSchemeSeed: Colors.indigo),
       home: const HomePage(),
       debugShowCheckedModeBanner: false,
@@ -55,36 +55,52 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final model = context.watch<MoodModel>();
     return Scaffold(
-      appBar: AppBar(title: const Text('Mood Toggle')),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text('How are you feeling?', style: TextStyle(fontSize: 22)),
-            const SizedBox(height: 16),
-            SizedBox(
-              height: 160,
-              child: Image.asset(model.moodImagePath, fit: BoxFit.contain),
+      appBar: AppBar(title: const Text('Mood Toggle Challenge')),
+      body: SafeArea(
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 420),
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    'How are you feeling?',
+                    style: TextStyle(fontSize: 22),
+                  ),
+                  const SizedBox(height: 16),
+                  AspectRatio(
+                    aspectRatio: 1.4,
+                    child: Image.asset(
+                      model.moodImagePath,
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                  const SizedBox(height: 28),
+                  Wrap(
+                    spacing: 12,
+                    runSpacing: 12,
+                    alignment: WrapAlignment.center,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () => context.read<MoodModel>().setHappy(),
+                        child: const Text('Happy 😊'),
+                      ),
+                      ElevatedButton(
+                        onPressed: () => context.read<MoodModel>().setSad(),
+                        child: const Text('Sad 😢'),
+                      ),
+                      ElevatedButton(
+                        onPressed: () => context.read<MoodModel>().setExcited(),
+                        child: const Text('Excited 🎉'),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-            const SizedBox(height: 28),
-            Wrap(
-              spacing: 12,
-              children: [
-                ElevatedButton(
-                  onPressed: () => context.read<MoodModel>().setHappy(),
-                  child: const Text('Happy'),
-                ),
-                ElevatedButton(
-                  onPressed: () => context.read<MoodModel>().setSad(),
-                  child: const Text('Sad'),
-                ),
-                ElevatedButton(
-                  onPressed: () => context.read<MoodModel>().setExcited(),
-                  child: const Text('Excited'),
-                ),
-              ],
-            ),
-          ],
+          ),
         ),
       ),
     );
